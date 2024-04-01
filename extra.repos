@@ -1,0 +1,5 @@
+repositories:
+  ecal_to_ros:
+    type: git
+    url: git@github.com:ipab-rad/ecal_to_ros.git
+    version: main
