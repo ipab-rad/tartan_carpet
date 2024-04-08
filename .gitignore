@@ -1,0 +1,5 @@
+# Ignore AV modules
+src/
+
+# Visual Studio Code
+.vscode/
