@@ -9,4 +9,10 @@ To clone all relevant repos:
 2. Install vcstool (After ROS is sourced): 
 `sudo apt update && sudo apt install python3-vcstool`
 3. Then, from the tartan_carpet repo, run: 
-`vcs import --input av.repos ../`
+
+```bash
+    # Crate src directory
+    mkdir src
+    # Import AV repos and submodules
+    vcs import --recursive --input av.repos ./src
+```
