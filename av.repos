@@ -10,15 +10,15 @@ repositories:
   dbw:
     type: git
     url: git@github.com:ipab-rad/dbw.git
-    version: init_config
+    version: main
   flir_camera_driver:
     type: git
     url: git@github.com:ipab-rad/flir_camera_driver.git
-    version: init_config
+    version: humble-release
   imu:
     type: git
     url: git@github.com:ipab-rad/imu.git
-    version: init_config
+    version: main
   novatel_gps_driver:
     type: git
     url: git@github.com:ipab-rad/novatel_gps_driver.git
