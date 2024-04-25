@@ -13,6 +13,10 @@
 #
 # See https://github.com/pre-commit/pre-commit
 
+# exclude: "^\
+#   (third_party/.*)\
+#   "
+
 repos:
   # Standard hooks
   - repo: https://github.com/pre-commit/pre-commit-hooks
@@ -32,7 +36,6 @@ repos:
       - id: trailing-whitespace
         exclude_types: [rst]
       - id: fix-byte-order-marker
-
 
   # Python hooks
   - repo: https://github.com/asottile/pyupgrade
@@ -84,7 +87,7 @@ repos:
         entry: ament_cpplint
         language: system
         files: \.(h\+\+|h|hh|hxx|hpp|cuh|c|cc|cpp|cu|c\+\+|cxx|tpp|txx)$
-        args: ["--linelength=100", "--filter=-whitespace/newline"]
+        args: ["--linelength=100", "--filter=-legal/copyright,-build/include_order"]
 
   # Cmake hooks
   - repo: local
@@ -96,14 +99,10 @@ repos:
         language: system
         files: CMakeLists\.txt$
 
-  # Copyright
-  - repo: local
+  - repo: https://github.com/cheshirekow/cmake-format-precommit
+    rev: v0.6.13
     hooks:
-      - id: ament_copyright
-        name: ament_copyright
-        description: Check if copyright notice is available in all files.
-        entry: ament_copyright
-        language: system
+      - id: cmake-format
 
   # Docs - RestructuredText hooks
   - repo: https://github.com/PyCQA/doc8
@@ -127,9 +126,10 @@ repos:
     rev: v2.2.6
     hooks:
       - id: codespell
-        args: ['--write-changes', '--uri-ignore-words-list=ist', '-L manuel']
+        args: ['--write-changes', '--uri-ignore-words-list=ist', '-L manuel,ned']
         exclude: CHANGELOG\.rst|\.(svg|pyc|drawio|dae)$
 
+  # Check Github files
   - repo: https://github.com/python-jsonschema/check-jsonschema
     rev: 0.28.2
     hooks:
@@ -139,3 +139,39 @@ repos:
         args: ["--verbose"]
       - id: check-dependabot
         args: ["--verbose"]
+
+  # Bash prettify
+  - repo: https://github.com/lovesegfault/beautysh
+    rev: v6.2.1
+    hooks:
+      - id: beautysh
+
+  # ROS checks
+  - repo: https://github.com/tier4/pre-commit-hooks-ros
+    rev: v0.8.0
+    hooks:
+      - id: flake8-ros
+      - id: prettier-xacro
+      - id: prettier-launch-xml
+      - id: prettier-package-xml
+      - id: ros-include-guard
+      - id: sort-package-xml
+
+  # Dockerfiles
+  - repo: https://github.com/AleksaC/hadolint-py
+    rev: v2.12.1b3
+    hooks:
+      - id: hadolint
+        args: ['--ignore=DL3008']
+
+ci:
+    autofix_commit_msg: |
+        [pre-commit.ci] auto fixes from pre-commit.com hooks
+
+        for more information, see https://pre-commit.ci
+    autofix_prs: false
+    autoupdate_branch: ''
+    autoupdate_commit_msg: '[pre-commit.ci] pre-commit autoupdate'
+    autoupdate_schedule: weekly
+    skip: [ament_cppcheck, ament_cpplint, ament_lint_cmake]
+    submodules: false
