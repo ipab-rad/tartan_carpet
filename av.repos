@@ -10,7 +10,7 @@ repositories:
   av_gps:
     type: git
     url: git@github.com:ipab-rad/av_gps.git
-    version: init_config
+    version: main
   av_imu:
     type: git
     url: git@github.com:ipab-rad/av_imu.git
