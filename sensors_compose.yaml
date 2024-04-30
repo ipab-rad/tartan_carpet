@@ -1,58 +1,58 @@
 services:
 
-  car_description:
-    image: "car_description_humble:latest"
-    container_name: car_description_humble
+  av_car_description:
+    image: "ghcr.io/ipab-rad/av_car_description:1.0.1"
+    container_name: av_car_description
     network_mode: "host"
     privileged: true
     volumes:
       - "/dev/shm:/dev/shm"      
 
-  dbw_dataspeed_driver:
-    image: "av_dbw_launch:latest"
-    container_name: av_dbw_launch
+  av_dbw:
+    image: "ghcr.io/ipab-rad/av_dbw:1.0.0"
+    container_name: av_dbw
     network_mode: "host"
     privileged: true
     volumes:
       - "/dev/shm:/dev/shm"
       - "/dev/bus/usb:/dev/bus/usb"
 
-  imu_microstrain_driver:
-    image: "imu_humble:latest"
-    container_name: imu_humble
+  av_imu:
+    image: "ghcr.io/ipab-rad/av_imu:1.0.0"
+    container_name: av_imu
     network_mode: "host"
     privileged: true
     volumes:
       - "/dev/shm:/dev/shm" 
       - "/dev/imu-6:/dev/imu-front"
   
-  gps_novatel_driver:
-    image: "av_novatel_launch_humble:latest"
-    container_name: av_novatel_launch_humble
+  av_gps:
+    image: "ghcr.io/ipab-rad/av_gps:1.0.0"
+    container_name: av_gps
     network_mode: "host"
     privileged: true
     volumes:
       - "/dev/shm:/dev/shm"  
 
-  lidar_ouster_driver:
-    image: "av_ouster_launch_humble:latest"
-    container_name: av_ouster_launch_humble
+  av_ouster:
+    image: "ghcr.io/ipab-rad/av_ouster:1.0.0"
+    container_name: av_ouster
     network_mode: "host"
     privileged: true
     volumes:
       - "/dev/shm:/dev/shm"  
 
-  lidars_velodyne_driver:
-    image: "av_velodyne_launch_humble:latest"
-    container_name: av_velodyne_launch_humble
+  av_velodyne:
+    image: "ghcr.io/ipab-rad/av_velodyne:1.0.0"
+    container_name: av_velodyne
     network_mode: "host"
     privileged: true
     volumes:
       - "/dev/shm:/dev/shm"
 
-  cameras_flir_driver:
+  av_camera:
     image: "av_camera_launch_humble:latest"
-    container_name: av_camera_launch_humble
+    container_name: av_camera
     network_mode: "host"
     privileged: true
     volumes:
