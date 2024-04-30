@@ -1,41 +1,41 @@
 repositories:
-  aw_radar_bridge:
+  av_car_description:
+    type: git
+    url: git@github.com:ipab-rad/av_car_description.git
+    version: main
+  av_dbw:
+    type: git
+    url: git@github.com:ipab-rad/av_dbw.git
+    version: main
+  av_gps:
+    type: git
+    url: git@github.com:ipab-rad/av_gps.git
+    version: init_config
+  av_imu:
+    type: git
+    url: git@github.com:ipab-rad/av_imu.git
+    version: main
+  av_ouster:
+    type: git
+    url: git@github.com:ipab-rad/av_ouster.git
+    version: main
+  av_radar:
+    type: git
+    url: git@github.com:ipab-rad/av_radar.git
+    version: main
+  av_radar_bridge:
     type: git
     url: git@github.com:ipab-rad/aw_radar_bridge.git
-    version: init_config
-  car_description:
+    version: main
+  av_velodyne:
     type: git
-    url: git@github.com:ipab-rad/car_description.git
-    version: init_config
-  dbw:
-    type: git
-    url: git@github.com:ipab-rad/dbw.git
+    url: git@github.com:ipab-rad/av_velodyne.git
     version: main
   flir_camera_driver:
     type: git
     url: git@github.com:ipab-rad/flir_camera_driver.git
     version: humble-release
-  imu:
-    type: git
-    url: git@github.com:ipab-rad/imu.git
-    version: main
-  novatel_gps_driver:
-    type: git
-    url: git@github.com:ipab-rad/novatel_gps_driver.git
-    version: init_config
-  radar:
-    type: git
-    url: git@github.com:ipab-rad/radar.git
-    version: init_config
   ros1_bridge:
     type: git
     url: git@github.com:ipab-rad/ros1_bridge.git
-    version: init_config
-  ros2_ouster_drivers:
-    type: git
-    url: git@github.com:ipab-rad/ros2_ouster_drivers.git
-    version: init_config
-  velodyne:
-    type: git
-    url: git@github.com:ipab-rad/velodyne.git
-    version: init_config
+    version: master
