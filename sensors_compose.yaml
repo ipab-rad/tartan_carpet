@@ -57,4 +57,5 @@ services:
     privileged: true
     volumes:
       - "/dev/shm:/dev/shm"
-    
+include:
+  - radar_compose.yaml
