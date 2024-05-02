@@ -6,7 +6,7 @@ services:
     network_mode: "host"
     privileged: true
     volumes:
-      - "/dev/shm:/dev/shm"      
+      - "/dev/shm:/dev/shm"
 
   av_dbw:
     image: "ghcr.io/ipab-rad/av_dbw:1.0.0"
@@ -23,16 +23,16 @@ services:
     network_mode: "host"
     privileged: true
     volumes:
-      - "/dev/shm:/dev/shm" 
+      - "/dev/shm:/dev/shm"
       - "/dev/imu-6:/dev/imu-front"
-  
+
   av_gps:
     image: "ghcr.io/ipab-rad/av_gps:1.0.0"
     container_name: av_gps
     network_mode: "host"
     privileged: true
     volumes:
-      - "/dev/shm:/dev/shm"  
+      - "/dev/shm:/dev/shm"
 
   av_ouster:
     image: "ghcr.io/ipab-rad/av_ouster:1.0.0"
@@ -40,7 +40,7 @@ services:
     network_mode: "host"
     privileged: true
     volumes:
-      - "/dev/shm:/dev/shm"  
+      - "/dev/shm:/dev/shm"
 
   av_velodyne:
     image: "ghcr.io/ipab-rad/av_velodyne:1.0.0"

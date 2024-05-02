@@ -7,7 +7,7 @@ services:
     privileged: true
     command: rosmaster --core
     volumes:
-      - "/dev/shm:/dev/shm"      
+      - "/dev/shm:/dev/shm"
 
   av_radar:
     image: "ghcr.io/ipab-rad/av_radar:1.0.0"
