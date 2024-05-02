@@ -1,7 +1,7 @@
 # tartan_carpet
 Main AV software stack setup repository
 
-## Instructions
+## Installation
 
 To clone all relevant repos:
 1. Clone this repository in a ROS workspace (i.e. ros_ws/src/):
@@ -15,4 +15,20 @@ To clone all relevant repos:
     mkdir src
     # Import AV repos and submodules
     vcs import --recursive --input av.repos ./src
+```
+
+## Run sensors
+
+To run all vehicle sensors, including drive-by-wire, use the following command
+
+```bash
+    docker compose -f ./sensors_compose.yaml up
+```
+
+If the docker images are not already downloaded, they will be automatically fetched from the GitHub Docker registry. Ensure you have access to the GitHub Docker registry; please contact @GreatAlexander or @hect95 for access details.
+
+To stop the sensors, press `Ctrl + C` in the same terminal. Additionally, you can remove the created Docker containers with:
+
+```bash
+    docker compose -f ./sensors_compose.yaml down
 ```

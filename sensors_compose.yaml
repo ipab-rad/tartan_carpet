@@ -1,0 +1,60 @@
+services:
+
+  av_car_description:
+    image: "ghcr.io/ipab-rad/av_car_description:1.0.1"
+    container_name: av_car_description
+    network_mode: "host"
+    privileged: true
+    volumes:
+      - "/dev/shm:/dev/shm"
+
+  av_dbw:
+    image: "ghcr.io/ipab-rad/av_dbw:1.0.0"
+    container_name: av_dbw
+    network_mode: "host"
+    privileged: true
+    volumes:
+      - "/dev/bus/usb:/dev/bus/usb"
+
+  av_imu:
+    image: "ghcr.io/ipab-rad/av_imu:1.0.0"
+    container_name: av_imu
+    network_mode: "host"
+    privileged: true
+    volumes:
+      - "/dev/shm:/dev/shm"
+      - "/dev/imu-6:/dev/imu-front"
+
+  av_gps:
+    image: "ghcr.io/ipab-rad/av_gps:1.0.0"
+    container_name: av_gps
+    network_mode: "host"
+    privileged: true
+    volumes:
+      - "/dev/shm:/dev/shm"
+
+  av_ouster:
+    image: "ghcr.io/ipab-rad/av_ouster:1.0.0"
+    container_name: av_ouster
+    network_mode: "host"
+    privileged: true
+    volumes:
+      - "/dev/shm:/dev/shm"
+
+  av_velodyne:
+    image: "ghcr.io/ipab-rad/av_velodyne:1.0.0"
+    container_name: av_velodyne
+    network_mode: "host"
+    privileged: true
+    volumes:
+      - "/dev/shm:/dev/shm"
+
+  av_camera:
+    image: "av_camera_launch_humble:latest"
+    container_name: av_camera
+    network_mode: "host"
+    privileged: true
+    volumes:
+      - "/dev/shm:/dev/shm"
+include:
+  - radar_compose.yaml
