@@ -6,8 +6,6 @@ services:
     network_mode: "host"
     privileged: true
     command: rosmaster --core
-    volumes:
-      - "/dev/shm:/dev/shm"
 
   av_radar:
     image: "ghcr.io/ipab-rad/av_radar:1.0.0"
@@ -22,6 +20,8 @@ services:
     container_name: ros1_bridge
     network_mode: "host"
     privileged: true
+    volumes:
+      - "/dev/shm:/dev/shm"
     depends_on:
       - av_radar
 
