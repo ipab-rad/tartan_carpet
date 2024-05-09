@@ -3,3 +3,7 @@ repositories:
     type: git
     url: git@github.com:ipab-rad/ecal_to_ros.git
     version: main
+  ecal_to_ros:
+    type: git
+    url: git@github.com:ipab-rad/av_tools.git
+    version: main
