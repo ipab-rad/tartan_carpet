@@ -1,0 +1,36 @@
+services:
+
+  ros1_master:
+    image: "av_radar:latest"
+    container_name: ros1_master
+    network_mode: "host"
+    privileged: true
+    command: rosmaster --core
+
+  av_radar:
+    image: "av_radar:latest"
+    container_name: av_radar
+    network_mode: "host"
+    privileged: true
+    depends_on:
+      - ros1_master
+
+  ros1_bridge:
+    image: "av_ros1_bridge:latest"
+    container_name: ros1_bridge
+    network_mode: "host"
+    privileged: true
+    volumes:
+      - "/dev/shm:/dev/shm"
+    depends_on:
+      - av_radar
+
+  av_radar_bridge:
+    image: "av_radar_bridge:latest"
+    container_name: av_radar_bridge
+    network_mode: "host"
+    privileged: true
+    volumes:
+      - "/dev/shm:/dev/shm"
+    depends_on:
+      - ros1_bridge
