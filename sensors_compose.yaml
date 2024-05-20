@@ -25,7 +25,7 @@ services:
     privileged: true
     volumes:
       - "/dev/shm:/dev/shm"
-      - "/dev/imu-6:/dev/imu-front"
+      - "/dev/imu-6:/dev/imu-6"
       - "/etc/localtime:/etc/localtime:ro"
 
   av_gps:
