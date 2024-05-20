@@ -7,6 +7,7 @@ services:
     privileged: true
     volumes:
       - "/dev/shm:/dev/shm"
+      - "/etc/localtime:/etc/localtime:ro"
 
   av_dbw:
     image: "av_dbw:latest"
@@ -15,6 +16,7 @@ services:
     privileged: true
     volumes:
       - "/dev/bus/usb:/dev/bus/usb"
+      - "/etc/localtime:/etc/localtime:ro"
 
   av_imu:
     image: "av_imu:latest"
@@ -24,6 +26,7 @@ services:
     volumes:
       - "/dev/shm:/dev/shm"
       - "/dev/imu-6:/dev/imu-front"
+      - "/etc/localtime:/etc/localtime:ro"
 
   av_gps:
     image: "av_gps:latest"
@@ -32,6 +35,7 @@ services:
     privileged: true
     volumes:
       - "/dev/shm:/dev/shm"
+      - "/etc/localtime:/etc/localtime:ro"
 
   av_ouster:
     image: "av_ouster:latest"
@@ -40,6 +44,7 @@ services:
     privileged: true
     volumes:
       - "/dev/shm:/dev/shm"
+      - "/etc/localtime:/etc/localtime:ro"
 
   av_velodyne:
     image: "av_velodyne:latest"
@@ -48,6 +53,7 @@ services:
     privileged: true
     volumes:
       - "/dev/shm:/dev/shm"
+      - "/etc/localtime:/etc/localtime:ro"
 
   av_camera:
     image: "av_camera:latest"
@@ -56,5 +62,7 @@ services:
     privileged: true
     volumes:
       - "/dev/shm:/dev/shm"
+      - "/etc/localtime:/etc/localtime:ro"
+
 include:
   - dev_radar_compose.yaml
