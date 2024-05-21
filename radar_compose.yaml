@@ -20,7 +20,7 @@ services:
       - ros1_master
 
   ros1_bridge:
-    image: "ghcr.io/ipab-rad/ros1_bridge:1.0.0"
+    image: "ghcr.io/ipab-rad/ros1_bridge:1.1.0"
     container_name: ros1_bridge
     network_mode: "host"
     privileged: true
@@ -31,7 +31,7 @@ services:
       - av_radar
 
   av_radar_bridge:
-    image: "ghcr.io/ipab-rad/av_radar_bridge:1.0.0"
+    image: "ghcr.io/ipab-rad/av_radar_bridge:1.1.0"
     container_name: av_radar_bridge
     network_mode: "host"
     privileged: true

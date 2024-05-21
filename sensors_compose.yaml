@@ -1,7 +1,7 @@
 services:
 
   av_car_description:
-    image: "ghcr.io/ipab-rad/av_car_description:1.0.1"
+    image: "ghcr.io/ipab-rad/av_car_description:1.1.0"
     container_name: av_car_description
     network_mode: "host"
     privileged: true
@@ -25,11 +25,11 @@ services:
     privileged: true
     volumes:
       - "/dev/shm:/dev/shm"
-      - "/dev/imu-6:/dev/imu-6"
+      - "/dev/imu-front:/dev/imu-front"
       - "/etc/localtime:/etc/localtime:ro"
 
   av_gps:
-    image: "ghcr.io/ipab-rad/av_gps:1.0.0"
+    image: "ghcr.io/ipab-rad/av_gps:1.1.0"
     container_name: av_gps
     network_mode: "host"
     privileged: true
@@ -38,7 +38,7 @@ services:
       - "/etc/localtime:/etc/localtime:ro"
 
   av_ouster:
-    image: "ghcr.io/ipab-rad/av_ouster:1.0.1"
+    image: "ghcr.io/ipab-rad/av_ouster:1.1.0"
     container_name: av_ouster
     network_mode: "host"
     privileged: true
@@ -47,7 +47,7 @@ services:
       - "/etc/localtime:/etc/localtime:ro"
 
   av_velodyne:
-    image: "ghcr.io/ipab-rad/av_velodyne:1.0.0"
+    image: "ghcr.io/ipab-rad/av_velodyne:1.1.0"
     container_name: av_velodyne
     network_mode: "host"
     privileged: true

@@ -35,6 +35,30 @@ This will pull the latest commits for the target branch of all repos
     # Pull latest code for all repos recursively
     vcs pull -n
 ```
+### Configure Linux Kernel receive buffer on your host machine
+
+To run any node on your machine, you need to tweak the maximum Linux Kernel receive buffer to allow high throughput messaging:
+
+1. **Create a Configuration File**:
+    ```bash
+    sudo touch /etc/sysctl.d/10-cyclone-max.conf
+    ```
+
+2. **Set the Maximum Receive Buffer**:
+    ```bash
+    echo "net.core.rmem_max=2147483647" | sudo tee /etc/sysctl.d/10-cyclone-max.conf
+    ```
+
+3. **Reload System Configuration**:
+    ```bash
+    sudo sysctl --system
+    ```
+
+Alternatively, you can apply the change for the current session only (the changes will be forgotten after a reboot):
+
+```bash
+sudo sysctl -w net.core.rmem_max=2147483647
+```
 
 ## Run sensors
 
