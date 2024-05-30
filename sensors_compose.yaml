@@ -19,7 +19,7 @@ services:
       - "/etc/localtime:/etc/localtime:ro"
 
   av_imu:
-    image: "ghcr.io/ipab-rad/av_imu:1.0.0"
+    image: "ghcr.io/ipab-rad/av_imu:1.1.0"
     container_name: av_imu
     network_mode: "host"
     privileged: true
