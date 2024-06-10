@@ -1,9 +1,9 @@
 repositories:
-  ecal_to_ros:
+  tools/ecal_to_ros:
     type: git
     url: git@github.com:ipab-rad/ecal_to_ros.git
     version: main
-  av_tools:
+  tools/av_tools:
     type: git
     url: git@github.com:ipab-rad/av_tools.git
-    version: main
+    version: shared-mem-comm

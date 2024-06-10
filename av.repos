@@ -1,41 +1,49 @@
 repositories:
-  av_car_description:
+  sensors_drivers/av_car_description:
     type: git
     url: git@github.com:ipab-rad/av_car_description.git
     version: main
-  av_dbw:
+  sensors_drivers/av_dbw:
     type: git
     url: git@github.com:ipab-rad/av_dbw.git
     version: main
-  av_gps:
+  sensors_drivers/av_gps:
     type: git
     url: git@github.com:ipab-rad/av_gps.git
     version: main
-  av_imu:
+  sensors_drivers/av_imu:
     type: git
     url: git@github.com:ipab-rad/av_imu.git
     version: main
-  av_ouster:
+  sensors_drivers/av_ouster:
     type: git
     url: git@github.com:ipab-rad/av_ouster.git
     version: main
-  av_radar:
+  sensors_drivers/av_radar:
     type: git
     url: git@github.com:ipab-rad/av_radar.git
     version: main
-  av_radar_bridge:
+  sensors_drivers/av_radar_bridge:
     type: git
     url: git@github.com:ipab-rad/aw_radar_bridge.git
     version: main
-  av_velodyne:
+  sensors_drivers/av_velodyne:
     type: git
     url: git@github.com:ipab-rad/av_velodyne.git
     version: main
-  flir_camera_driver:
+  sensors_drivers/flir_camera_driver:
     type: git
     url: git@github.com:ipab-rad/flir_camera_driver.git
     version: humble-release
-  ros1_bridge:
+  sensors_drivers/ros1_bridge:
     type: git
     url: git@github.com:ipab-rad/ros1_bridge.git
     version: master
+  av_iox_roudi_launch:
+    type: git
+    url: git@github.com:ipab-rad/av_iox_roudi_launch.git
+    version: main
+  av_autoware_launch:
+    type: git
+    url: git@github.com:ipab-rad/autoware_launch.git
+    version: tartan-perception-launch
