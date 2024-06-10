@@ -43,7 +43,7 @@ repositories:
     type: git
     url: git@github.com:ipab-rad/av_iox_roudi_launch.git
     version: main
-  av_autoware_launch:
+  autoware_launch:
     type: git
     url: git@github.com:ipab-rad/autoware_launch.git
     version: tartan-perception-launch
