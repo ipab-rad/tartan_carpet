@@ -155,6 +155,6 @@ ci:
     autofix_prs: false
     autoupdate_branch: ''
     autoupdate_commit_msg: '[pre-commit.ci] pre-commit autoupdate'
-    autoupdate_schedule: weekly
+    autoupdate_schedule: monthly
     skip: [ament_cppcheck, ament_cpplint, ament_lint_cmake]
     submodules: false
