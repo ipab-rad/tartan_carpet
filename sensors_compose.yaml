@@ -41,7 +41,7 @@ services:
       - "/etc/localtime:/etc/localtime:ro"
 
   av_ouster:
-    image: "ghcr.io/ipab-rad/av_ouster:1.2.0"
+    image: "ghcr.io/ipab-rad/av_ouster:2.1.0"
     container_name: av_ouster
     network_mode: "host"
     privileged: true
@@ -61,7 +61,7 @@ services:
       - "/etc/localtime:/etc/localtime:ro"
 
   av_camera:
-    image: "av_camera:latest"
+    image: "ghcr.io/ipab-rad/av_camera:1.0.0"
     container_name: av_camera
     network_mode: "host"
     privileged: true
