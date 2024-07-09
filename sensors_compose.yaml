@@ -1,7 +1,7 @@
 services:
 
   av_car_description:
-    image: "ghcr.io/ipab-rad/av_car_description:1.2.0"
+    image: "ghcr.io/ipab-rad/av_car_description:1.3.0"
     container_name: av_car_description
     network_mode: "host"
     privileged: true
@@ -41,7 +41,7 @@ services:
       - "/etc/localtime:/etc/localtime:ro"
 
   av_ouster:
-    image: "ghcr.io/ipab-rad/av_ouster:1.2.0"
+    image: "ghcr.io/ipab-rad/av_ouster:2.1.0"
     container_name: av_ouster
     network_mode: "host"
     privileged: true
@@ -61,7 +61,7 @@ services:
       - "/etc/localtime:/etc/localtime:ro"
 
   av_camera:
-    image: "av_camera:latest"
+    image: "ghcr.io/ipab-rad/av_camera:1.0.0"
     container_name: av_camera
     network_mode: "host"
     privileged: true
@@ -69,5 +69,19 @@ services:
       - "/dev:/dev"
       - "/tmp:/tmp"
       - "/etc/localtime:/etc/localtime:ro"
+
+  av_camera_trigger:
+    image: "ghcr.io/ipab-rad/av_camera_trigger:1.0.0"
+    command: sh -c "sleep 13 && ros2 launch av_camera_trigger av_camera_trigger.launch.xml"
+    container_name: av_camera_trigger
+    network_mode: "host"
+    privileged: true
+    volumes:
+      - "/dev:/dev"
+      - "/tmp:/tmp"
+      - "/etc/localtime:/etc/localtime:ro"
+    depends_on:
+      - av_camera
+
 include:
   - radar_compose.yaml
