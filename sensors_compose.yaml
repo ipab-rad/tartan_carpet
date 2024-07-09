@@ -82,6 +82,6 @@ services:
       - "/etc/localtime:/etc/localtime:ro"
     depends_on:
       - av_camera
-  
+
 include:
   - radar_compose.yaml

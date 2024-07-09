@@ -16,4 +16,3 @@ docker compose -f ./sensors_compose.yaml up &
 
 # Wait for Docker Compose to finish
 wait $!
-
