@@ -69,5 +69,19 @@ services:
       - "/dev:/dev"
       - "/tmp:/tmp"
       - "/etc/localtime:/etc/localtime:ro"
+
+  av_camera_trigger:
+    image: "ghcr.io/ipab-rad/av_camera_trigger:1.0.0"
+    command: sh -c "sleep 13 && ros2 launch av_camera_trigger av_camera_trigger.launch.xml"
+    container_name: av_camera_trigger
+    network_mode: "host"
+    privileged: true
+    volumes:
+      - "/dev:/dev"
+      - "/tmp:/tmp"
+      - "/etc/localtime:/etc/localtime:ro"
+    depends_on:
+      - av_camera
+  
 include:
   - radar_compose.yaml
