@@ -1,4 +1,12 @@
 repositories:
+  av_camera:
+    type: git
+    url: git@github.com:ipab-rad/av_camera.git
+    version: main
+  av_camera_trigger:
+    type: git
+    url: git@github.com:ipab-rad/av_camera_trigger.git
+    version: main
   av_car_description:
     type: git
     url: git@github.com:ipab-rad/av_car_description.git
@@ -14,6 +22,10 @@ repositories:
   av_imu:
     type: git
     url: git@github.com:ipab-rad/av_imu.git
+    version: main
+  av_ntrip_client:
+    type: git
+    url: git@github.com:ipab-rad/av_ntrip_client.git
     version: main
   av_ouster:
     type: git
@@ -31,10 +43,6 @@ repositories:
     type: git
     url: git@github.com:ipab-rad/av_velodyne.git
     version: main
-  flir_camera_driver:
-    type: git
-    url: git@github.com:ipab-rad/flir_camera_driver.git
-    version: humble-release
   ros1_bridge:
     type: git
     url: git@github.com:ipab-rad/ros1_bridge.git
