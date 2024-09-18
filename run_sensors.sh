@@ -6,6 +6,8 @@ help() {
     Options:
       --dev        Use the 'dev_sensors_compose.yaml' file
       --build      Build Docker images for the specified sensors (only valid with --dev)
+      --build-only Only build Docker images
+      --no-cache   Build Docker images with no cache
       -h, --help   Show this help message and exit
     "
     exit 0
@@ -28,6 +30,8 @@ compose_file="./sensors_compose.yaml"
 services=""
 build_docker=""
 is_dev_mode="false"
+run_services="true"
+build_no_cache=""
 
 while [[ $# -gt 0 ]]; do
     case $1 in
@@ -40,6 +44,15 @@ while [[ $# -gt 0 ]]; do
             build_docker="True"
             shift
             ;;
+        --build-only)
+           build_docker="True"
+           run_services="false"
+           shift
+           ;;
+        --no-cache)
+          build_no_cache="--no-cache"
+          shift
+          ;;
         -h|--help)
             help
             ;;
@@ -60,7 +73,7 @@ build_docker_images() {
             if [[ -f "$dir/Dockerfile" ]]; then
                 echo "Building Docker image for $service..."
                 pushd "$dir" > /dev/null   # Change to the directory containing the Dockerfile
-                docker build -t "$service:latest" --target runtime .
+                docker build $build_no_cache -t "$service:latest" --target runtime .
                 popd > /dev/null   # Return to the original directory
                 found=1
                 break
@@ -83,11 +96,13 @@ if [ "$is_dev_mode" == "true" ] && [ -n "$build_docker" ]; then
     fi
 fi
 
-# Start Docker Compose with optional services
-if [ -n "$services" ]; then
-    docker compose -f "$compose_file" up $services &
-else
-    docker compose -f "$compose_file" up &
+if [ "$run_services" == "true" ]; then
+ # Start Docker Compose with optional services
+ if [ -n "$services" ]; then
+     docker compose -f "$compose_file" up $services &
+ else
+     docker compose -f "$compose_file" up &
+ fi
 fi
 
 # Wait for Docker Compose to finish
