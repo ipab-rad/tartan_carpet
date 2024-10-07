@@ -16,7 +16,7 @@
 repos:
   # Standard hooks
   - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v4.6.0
+    rev: v5.0.0
     hooks:
       - id: check-added-large-files
       - id: check-ast
@@ -41,14 +41,14 @@ repos:
         args: [--py36-plus]
 
   - repo: https://github.com/psf/black
-    rev: 24.8.0
+    rev: 24.10.0
     hooks:
       - id: black
         args: ["--line-length=79", -S]
 
   # CPP hooks
   - repo: https://github.com/pre-commit/mirrors-clang-format
-    rev: v18.1.8
+    rev: v19.1.1
     hooks:
       - id: clang-format
         args: ['-fallback-style=none', '-i']
@@ -114,7 +114,7 @@ repos:
 
   # Check Github files
   - repo: https://github.com/python-jsonschema/check-jsonschema
-    rev: 0.29.2
+    rev: 0.29.3
     hooks:
       - id: check-github-workflows
         args: ["--verbose"]
