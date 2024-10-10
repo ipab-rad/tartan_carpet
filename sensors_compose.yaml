@@ -31,7 +31,7 @@ services:
       - "/etc/localtime:/etc/localtime:ro"
 
   av_gps:
-    image: "ghcr.io/ipab-rad/av_gps:1.2.0"
+    image: "ghcr.io/ipab-rad/av_gps:1.2.1"
     container_name: av_gps
     network_mode: "host"
     privileged: true
