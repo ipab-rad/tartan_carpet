@@ -41,7 +41,7 @@ services:
       - "/etc/localtime:/etc/localtime:ro"
 
   av_ouster:
-    image: "ghcr.io/ipab-rad/av_ouster:2.3.0"
+    image: "ghcr.io/ipab-rad/av_ouster:2.4.0"
     command: sh -c "ros2 launch av_ouster_launch av_ouster.launch.xml ros_time:='True'"
     container_name: av_ouster
     network_mode: "host"
