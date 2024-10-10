@@ -43,11 +43,11 @@ while [[ $# -gt 0 ]]; do
             shift
             ;;
         --build)
-            build_docker="True"
+            build_docker="true"
             shift
             ;;
         --build-only)
-            build_docker="True"
+            build_docker="true"
             run_services="false"
             shift
             ;;
