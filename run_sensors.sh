@@ -2,7 +2,7 @@
 
 help() {
     echo "Usage: run_sensors.sh [options] [sensor_list]
-    
+
     Options:
       --dev        Use the 'dev_sensors_compose.yaml' file
       --build      Build Docker images for the specified sensors (only valid with --dev)
@@ -45,14 +45,14 @@ while [[ $# -gt 0 ]]; do
             shift
             ;;
         --build-only)
-           build_docker="True"
-           run_services="false"
-           shift
-           ;;
+            build_docker="True"
+            run_services="false"
+            shift
+            ;;
         --no-cache)
-          build_no_cache="--no-cache"
-          shift
-          ;;
+            build_no_cache="--no-cache"
+            shift
+            ;;
         -h|--help)
             help
             ;;
@@ -97,12 +97,12 @@ if [ "$is_dev_mode" == "true" ] && [ -n "$build_docker" ]; then
 fi
 
 if [ "$run_services" == "true" ]; then
- # Start Docker Compose with optional services
- if [ -n "$services" ]; then
-     docker compose -f "$compose_file" up $services &
- else
-     docker compose -f "$compose_file" up &
- fi
+    # Start Docker Compose with optional services
+    if [ -n "$services" ]; then
+        docker compose -f "$compose_file" up $services &
+    else
+        docker compose -f "$compose_file" up &
+    fi
 fi
 
 # Wait for Docker Compose to finish
