@@ -42,6 +42,7 @@ services:
 
   av_ouster:
     image: "av_ouster:latest"
+    command: sh -c "ros2 launch av_ouster_launch av_ouster.launch.xml ros_time:='True'"
     container_name: av_ouster
     network_mode: "host"
     privileged: true
@@ -52,6 +53,7 @@ services:
 
   av_velodyne:
     image: "av_velodyne:latest"
+    command: sh -c "ros2 launch av_velodyne_launch av_velodyne.launch.xml ros_time:='True'"
     container_name: av_velodyne
     network_mode: "host"
     privileged: true
