@@ -8,7 +8,7 @@ help() {
       --build      Build Docker images for the specified sensors (only valid with --dev)
       --build-only Only build Docker images
       --no-cache   Build Docker images with no cache
-      --ros-time   Use internal ROS timestamps for lidar msgs (i.e. not GPS/PPS) 
+      --ros-time   Use internal ROS timestamps for lidar msgs (i.e. not GPS/PPS)
       -h, --help   Show this help message and exit
     "
     exit 0
@@ -54,7 +54,7 @@ while [[ $# -gt 0 ]]; do
         --no-cache)
             build_no_cache="--no-cache"
             shift
-            ;;        
+            ;;
         --ros-time)
             ros_time="true"
             shift
