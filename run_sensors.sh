@@ -8,6 +8,7 @@ help() {
       --build      Build Docker images for the specified sensors (only valid with --dev)
       --build-only Only build Docker images
       --no-cache   Build Docker images with no cache
+      --ros-time   Use internal ROS timestamps for lidar msgs (i.e. not GPS/PPS) 
       -h, --help   Show this help message and exit
     "
     exit 0
@@ -32,6 +33,7 @@ build_docker=""
 is_dev_mode="false"
 run_services="true"
 build_no_cache=""
+ros_time="false"
 
 while [[ $# -gt 0 ]]; do
     case $1 in
@@ -51,6 +53,10 @@ while [[ $# -gt 0 ]]; do
             ;;
         --no-cache)
             build_no_cache="--no-cache"
+            shift
+            ;;        
+        --ros-time)
+            ros_time="true"
             shift
             ;;
         -h|--help)
@@ -97,6 +103,10 @@ if [ "$is_dev_mode" == "true" ] && [ -n "$build_docker" ]; then
 fi
 
 if [ "$run_services" == "true" ]; then
+    # Edit compose_file name if needed for ros_time version
+    if [ "$ros_time" == "true" ]; then
+        compose_file=${compose_file::-5}"_ros_time.yaml"
+    fi
     # Start Docker Compose with optional services
     if [ -n "$services" ]; then
         docker compose -f "$compose_file" up $services &
