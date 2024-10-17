@@ -5,14 +5,12 @@ help() {
 
     Options:
       --dev        Use the 'dev_sensors_compose.yaml' file
-      --build      Build Docker images for the specified sensors (only valid with --dev)
-      --build-only Only build Docker images
+      --build      Build Docker images for the specified sensors
       --no-cache   Build Docker images with no cache
       -h, --help   Show this help message and exit
     "
     exit 0
 }
-
 
 # Function to handle termination
 stop_sensors() {
@@ -29,24 +27,19 @@ trap 'stop_sensors' SIGINT SIGTERM
 compose_file="./sensors_compose.yaml"
 services=""
 build_docker=""
-is_dev_mode="false"
-run_services="true"
+run_action_count=0  # Counter to track --dev and --build
 build_no_cache=""
 
 while [[ $# -gt 0 ]]; do
     case $1 in
         --dev)
             compose_file="./dev_sensors_compose.yaml"
-            is_dev_mode="true"
+            ((run_action_count++))  # Increment counter for --dev
             shift
             ;;
         --build)
             build_docker="True"
-            shift
-            ;;
-        --build-only)
-            build_docker="True"
-            run_services="false"
+            ((run_action_count++))  # Increment counter for --build
             shift
             ;;
         --no-cache)
@@ -86,18 +79,27 @@ build_docker_images() {
     done
 }
 
-# Only build Docker images if --dev is specified
-if [ "$is_dev_mode" == "true" ] && [ -n "$build_docker" ]; then
+# If both --dev and --build are provided, first build, then run Docker Compose
+if [ "$run_action_count" -eq 2 ]; then
+    if [ -n "$services" ]; then
+        build_docker_images
+        docker compose -f "$compose_file" up $services &
+    else
+        echo "No services specified for building."
+        exit 1
+    fi
+
+    # If only --build is provided, build the Docker images but don't run services
+elif [ -n "$build_docker" ]; then
     if [ -n "$services" ]; then
         build_docker_images
     else
         echo "No services specified for building."
         exit 1
     fi
-fi
 
-if [ "$run_services" == "true" ]; then
-    # Start Docker Compose with optional services
+    # Default case: run Docker Compose with the defined compose file
+else
     if [ -n "$services" ]; then
         docker compose -f "$compose_file" up $services &
     else
