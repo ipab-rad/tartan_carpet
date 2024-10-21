@@ -4,7 +4,7 @@ help() {
     echo "Usage: run_sensors.sh [options] [sensor_list]
 
     Options:
-      --dev        Use the 'dev_sensors_compose.yaml' file
+      --local        Use the 'local_sensors_compose.yaml' file
       --build      Build Docker images for the specified sensors
       --no-cache   Build Docker images with no cache
       -h, --help   Show this help message and exit
@@ -27,14 +27,14 @@ trap 'stop_sensors' SIGINT SIGTERM
 compose_file="./sensors_compose.yaml"
 services=""
 build_docker=""
-run_action_count=0  # Counter to track --dev and --build
+run_action_count=0  # Counter to track --local and --build
 build_no_cache=""
 
 while [[ $# -gt 0 ]]; do
     case $1 in
-        --dev)
-            compose_file="./dev_sensors_compose.yaml"
-            ((run_action_count++))  # Increment counter for --dev
+        --local)
+            compose_file="./local_sensors_compose.yaml"
+            ((run_action_count++))  # Increment counter for --local
             shift
             ;;
         --build)
@@ -79,7 +79,7 @@ build_docker_images() {
     done
 }
 
-# If both --dev and --build are provided, first build, then run Docker Compose
+# If both --local and --build are provided, first build, then run Docker Compose
 if [ "$run_action_count" -eq 2 ]; then
     if [ -n "$services" ]; then
         build_docker_images

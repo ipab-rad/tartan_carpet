@@ -80,10 +80,10 @@ To stop the sensors, press `Ctrl + C` in the same terminal.
 
 By default, `run_sensors.sh` will use [sensors_compose.yaml](./sensors_compose.yaml) to run the sensors Docker containers. This file contains versioned Docker image tags that are generated based on the AV project's CI pipeline and cannot be modified.
 
-For development purposes, the script supports the `--dev` flag, which runs Docker containers with the `latest` tag. If you've made local changes to a sensor's Dockerfile(s), you can build and run the local containers using:
+For development purposes, the script supports the `--local` flag, which runs locally built Docker containers with the `latest` tag. If you've made local changes to a sensor's Dockerfile(s), you can build and run the local containers using:
 
 ```bash
-./run_sensors.sh --dev --build av_velodyne av_ouster ...
+./run_sensors.sh --local --build av_velodyne av_ouster ...
 ```
 
 Or, if you only want to build the Docker images without running the containers:
@@ -95,4 +95,4 @@ Or, if you only want to build the Docker images without running the containers:
 ./run_sensors.sh --build --no-cache av_velodyne av_ouster ...
 ```
 
-For reference on which Docker services you can run in development mode, see [dev_sensors_compose.yaml](./dev_sensors_compose.yaml).
+For reference on which Docker services you can run in development mode, see [local_sensors_compose.yaml](./local_sensors_compose.yaml).
