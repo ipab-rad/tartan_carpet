@@ -1,5 +1,15 @@
 services:
 
+  av_bms:
+    image: "ghcr.io/ipab-rad/av_bms:latest"
+    container_name: av_bms
+    network_mode: "host"
+    privileged: true
+    volumes:
+      - "/dev:/dev"
+      - "/tmp:/tmp"
+      - "/etc/localtime:/etc/localtime:ro"
+
   av_car_description:
     image: "av_car_description:latest"
     container_name: av_car_description
