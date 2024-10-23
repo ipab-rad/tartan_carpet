@@ -1,7 +1,7 @@
 services:
 
   av_bms:
-    image: "ghcr.io/ipab-rad/av_bms:latest"
+    image: "av_bms:latest"
     container_name: av_bms
     network_mode: "host"
     privileged: true
