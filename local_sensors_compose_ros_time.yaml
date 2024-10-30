@@ -86,4 +86,4 @@ services:
       - av_camera
 
 include:
-  - dev_radar_compose.yaml
+  - local_radar_compose.yaml
