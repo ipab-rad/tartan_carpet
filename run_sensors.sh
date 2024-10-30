@@ -8,6 +8,7 @@ help() {
       --build      Build Docker images for the specified sensors
       --no-cache   Build Docker images with no cache
       --ros-time   Use internal ROS timestamps for lidar msgs (i.e. not GPS/PPS)
+                   Only activated if --local is defined
       -h, --help   Show this help message and exit
     "
     exit 0
@@ -31,11 +32,12 @@ build_docker=""
 run_action_count=0  # Counter to track --local and --build
 build_no_cache=""
 ros_time="False"
+run_local="False"
 
 while [[ $# -gt 0 ]]; do
     case $1 in
         --local)
-            compose_file="./local_sensors_compose.yaml"
+            run_local="True"
             ((run_action_count++))  # Increment counter for --local
             shift
             ;;
@@ -85,9 +87,12 @@ build_docker_images() {
     done
 }
 
-# Edit compose_file name if needed for ros_time version
-if [ "$ros_time" == "True" ]; then
-    compose_file=${compose_file::-5}"_ros_time.yaml"
+if [ "$run_local" == "True" ]; then
+    compose_file="./local_sensors_compose.yaml"
+    # Edit compose_file name if needed for ros_time version
+    if [ "$ros_time" == "True" ]; then
+        compose_file=${compose_file::-5}"_ros_time.yaml"
+    fi
 fi
 
 # If both --local and --build are provided, first build, then run Docker Compose
