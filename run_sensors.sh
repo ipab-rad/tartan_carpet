@@ -4,17 +4,14 @@ help() {
     echo "Usage: run_sensors.sh [options] [sensor_list]
 
     Options:
-      --dev        Use the 'dev_sensors_compose.yaml' file
-      --build      Build Docker images for the specified sensors (only valid with --dev)
-      --build-only Only build Docker images
-      --local        Use the 'local_sensors_compose.yaml' file
+      --local      Use the 'local_sensors_compose.yaml' file
+      --build      Build Docker images for the specified sensors
       --no-cache   Build Docker images with no cache
       --ros-time   Use internal ROS timestamps for lidar msgs (i.e. not GPS/PPS)
       -h, --help   Show this help message and exit
     "
     exit 0
 }
-
 
 # Function to handle termination
 stop_sensors() {
@@ -31,29 +28,9 @@ trap 'stop_sensors' SIGINT SIGTERM
 compose_file="./sensors_compose.yaml"
 services=""
 build_docker=""
-<<<<<<< HEAD
-is_dev_mode="false"
-run_services="true"
-build_no_cache=""
-ros_time="false"
-
-while [[ $# -gt 0 ]]; do
-    case $1 in
-        --dev)
-            compose_file="./dev_sensors_compose.yaml"
-            is_dev_mode="true"
-            shift
-            ;;
-        --build)
-            build_docker="true"
-            shift
-            ;;
-        --build-only)
-            build_docker="true"
-            run_services="false"
-=======
 run_action_count=0  # Counter to track --local and --build
 build_no_cache=""
+ros_time="False"
 
 while [[ $# -gt 0 ]]; do
     case $1 in
@@ -65,7 +42,6 @@ while [[ $# -gt 0 ]]; do
         --build)
             build_docker="True"
             ((run_action_count++))  # Increment counter for --build
->>>>>>> 2c8fd757f750d5d88238d35a50005f65432f531c
             shift
             ;;
         --no-cache)
@@ -73,7 +49,7 @@ while [[ $# -gt 0 ]]; do
             shift
             ;;
         --ros-time)
-            ros_time="true"
+            ros_time="True"
             shift
             ;;
         -h|--help)
@@ -109,10 +85,11 @@ build_docker_images() {
     done
 }
 
-<<<<<<< HEAD
-# Only build Docker images if --dev is specified
-if [ "$is_dev_mode" == "true" ] && [ -n "$build_docker" ]; then
-=======
+# Edit compose_file name if needed for ros_time version
+if [ "$ros_time" == "True" ]; then
+    compose_file=${compose_file::-5}"_ros_time.yaml"
+fi
+
 # If both --local and --build are provided, first build, then run Docker Compose
 if [ "$run_action_count" -eq 2 ]; then
     if [ -n "$services" ]; then
@@ -125,27 +102,15 @@ if [ "$run_action_count" -eq 2 ]; then
 
     # If only --build is provided, build the Docker images but don't run services
 elif [ -n "$build_docker" ]; then
->>>>>>> 2c8fd757f750d5d88238d35a50005f65432f531c
     if [ -n "$services" ]; then
         build_docker_images
     else
         echo "No services specified for building."
         exit 1
     fi
-<<<<<<< HEAD
-fi
-
-if [ "$run_services" == "true" ]; then
-    # Edit compose_file name if needed for ros_time version
-    if [ "$ros_time" == "true" ]; then
-        compose_file=${compose_file::-5}"_ros_time.yaml"
-    fi
-    # Start Docker Compose with optional services
-=======
 
     # Default case: run Docker Compose with the defined compose file
 else
->>>>>>> 2c8fd757f750d5d88238d35a50005f65432f531c
     if [ -n "$services" ]; then
         docker compose -f "$compose_file" up $services &
     else
