@@ -60,21 +60,39 @@ Alternatively, you can apply the change for the current session only (the change
 sudo sysctl -w net.core.rmem_max=2147483647
 ```
 
-## Run sensors
+## Running the Sensors
 
-To run all vehicle sensors, including drive-by-wire, use the following command
-
-```bash
-    docker compose -f ./sensors_compose.yaml up
-```
-
-If the docker images are not already downloaded, they will be automatically
-fetched from the GitHub Docker registry. Ensure you have access to the GitHub
-Docker registry; please contact @GreatAlexander or @hect95 for access details.
-
-To stop the sensors, press `Ctrl + C` in the same terminal. Additionally, you
-can remove the created Docker containers with:
+To run all vehicle sensors, including drive-by-wire, simply use the following command:
 
 ```bash
-    docker compose -f ./sensors_compose.yaml down
+./run_sensors.sh
 ```
+Or, if you want to run specific sensors
+
+```bash
+./run_sensors.sh <sensor_list>
+```
+Where `<sensors_list>` is a spaced-separated list containing all the desired sensors to run. See [sensor_compose.yaml](./sensors_compose.yaml) and [radar_compose.yaml](./radar_compose.yaml) for reference.
+
+If the Docker images are not already present on your machine, they will be automatically fetched from the GitHub Docker registry. Please ensure you have access to the registry; for access details, contact @GreatAlexander or @hect95.
+
+To stop the sensors, press `Ctrl + C` in the same terminal.
+
+By default, `run_sensors.sh` will use [sensors_compose.yaml](./sensors_compose.yaml) to run the sensors Docker containers. This file contains versioned Docker image tags that are generated based on the AV project's CI pipeline and cannot be modified.
+
+For development purposes, the script supports the `--local` flag, which runs locally built Docker containers with the `latest` tag. If you've made local changes to a sensor's Dockerfile(s), you can build and run the local containers using:
+
+```bash
+./run_sensors.sh --local --build av_velodyne av_ouster ...
+```
+
+Or, if you only want to build the Docker images without running the containers:
+
+```bash
+./run_sensors.sh --build av_velodyne av_ouster ...
+
+# Optionally, build with no cache
+./run_sensors.sh --build --no-cache av_velodyne av_ouster ...
+```
+
+For reference on which Docker services you can run in development mode, see [local_sensors_compose.yaml](./local_sensors_compose.yaml).

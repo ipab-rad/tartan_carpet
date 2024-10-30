@@ -7,15 +7,15 @@ services:
     privileged: true
     command: rosmaster --core
     volumes:
-     - "/etc/localtime:/etc/localtime:ro"
+      - "/etc/localtime:/etc/localtime:ro"
 
   av_radar:
-    image: "ghcr.io/ipab-rad/av_radar:1.0.0"
+    image: "ghcr.io/ipab-rad/av_radar:2.0.0"
     container_name: av_radar
     network_mode: "host"
     privileged: true
     volumes:
-     - "/etc/localtime:/etc/localtime:ro"
+      - "/etc/localtime:/etc/localtime:ro"
     depends_on:
       - ros1_master
 
@@ -31,7 +31,7 @@ services:
       - av_radar
 
   av_radar_bridge:
-    image: "ghcr.io/ipab-rad/av_radar_bridge:1.1.0"
+    image: "ghcr.io/ipab-rad/av_radar_bridge:2.0.0"
     container_name: av_radar_bridge
     network_mode: "host"
     privileged: true

@@ -1,5 +1,15 @@
 services:
 
+  av_bms:
+    image: "av_bms:latest"
+    container_name: av_bms
+    network_mode: "host"
+    privileged: true
+    volumes:
+      - "/dev:/dev"
+      - "/tmp:/tmp"
+      - "/etc/localtime:/etc/localtime:ro"
+
   av_car_description:
     image: "av_car_description:latest"
     container_name: av_car_description
@@ -84,4 +94,4 @@ services:
       - av_camera
 
 include:
-  - dev_radar_compose.yaml
+  - local_radar_compose.yaml

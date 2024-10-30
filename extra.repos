@@ -11,3 +11,7 @@ repositories:
     type: git
     url: git@github.com:ipab-rad/robot_state_publisher.git
     version: tartan-humble
+  CalibrationTools:
+    type: git
+    url: git@github.com:ipab-rad/CalibrationTools.git
+    version: init_sensor_calibration

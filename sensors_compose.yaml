@@ -1,7 +1,17 @@
 services:
 
+  av_bms:
+    image: "ghcr.io/ipab-rad/av_bms:0.0.1"
+    container_name: av_bms
+    network_mode: "host"
+    privileged: true
+    volumes:
+      - "/dev:/dev"
+      - "/tmp:/tmp"
+      - "/etc/localtime:/etc/localtime:ro"
+
   av_car_description:
-    image: "ghcr.io/ipab-rad/av_car_description:1.4.0"
+    image: "ghcr.io/ipab-rad/av_car_description:1.6.0"
     container_name: av_car_description
     network_mode: "host"
     privileged: true
@@ -21,7 +31,7 @@ services:
       - "/etc/localtime:/etc/localtime:ro"
 
   av_imu:
-    image: "ghcr.io/ipab-rad/av_imu:1.2.1"
+    image: "ghcr.io/ipab-rad/av_imu:2.0.0"
     container_name: av_imu
     network_mode: "host"
     privileged: true
@@ -41,7 +51,7 @@ services:
       - "/etc/localtime:/etc/localtime:ro"
 
   av_ouster:
-    image: "ghcr.io/ipab-rad/av_ouster:2.3.0"
+    image: "ghcr.io/ipab-rad/av_ouster:2.4.0"
     container_name: av_ouster
     network_mode: "host"
     privileged: true
@@ -61,7 +71,7 @@ services:
       - "/etc/localtime:/etc/localtime:ro"
 
   av_camera:
-    image: "ghcr.io/ipab-rad/av_camera:1.0.0"
+    image: "ghcr.io/ipab-rad/av_camera:1.2.0"
     container_name: av_camera
     network_mode: "host"
     privileged: true
