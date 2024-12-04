@@ -23,8 +23,10 @@ pull_request_rules:
         method: squash
 merge_protections:
   - name: Require approval
-    description: Require at least one review approval before merging is allowed
+    description: Require at least one review approval before merging is allowed (If
+      not a pre-commit PR)
     if:
+      - -author = pre-commit-ci[bot]
       - base = main
     success_conditions:
       - "#approved-reviews-by >= 1"
