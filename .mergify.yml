@@ -1,0 +1,32 @@
+pull_request_rules:
+  - name: assign PR to its author
+    conditions:
+      - base = main
+    actions:
+      assign:
+        add_users:
+          - "{{author}}"
+  - name: review request for all PRs
+    conditions:
+      - base = main
+    actions:
+      request_reviews:
+        users:
+          - GreatAlexander
+          - hect95
+  - name: automatic merge for pre-commit ci updates
+    conditions:
+      - author=pre-commit-ci[bot]
+      - title=[pre-commit.ci] pre-commit autoupdate
+    actions:
+      merge:
+        method: squash
+merge_protections:
+  - name: Require approval
+    description: Require at least one review approval before merging is allowed (If
+      not a pre-commit PR)
+    if:
+      - -author = pre-commit-ci[bot]
+      - base = main
+    success_conditions:
+      - "#approved-reviews-by >= 1"
