@@ -1,0 +1,11 @@
+name: Pre-commit-TEST-UPDATE
+
+on:
+  workflow_dispatch:
+  pull_request:
+
+jobs:
+  auto_update_and_create_pr:
+    uses: ./.github/workflows/reusable-update-pre-commit.yml
+    secrets:
+      precommit-pr-token: ${{ secrets.PRECOMMIT_AUTOUPDATE_PR_TOKEN }}
