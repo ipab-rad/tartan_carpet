@@ -1,0 +1,111 @@
+name: Reusable Update pre-commit
+# Update pre-commit config and create PR if changes are detected
+# OG author: Christoph Fröhlich <christoph.froehlich@ait.ac.at>[ROS2 Control CI]
+# UoE editor: Alejandro Bordallo <alex.bordallo@ed.ac.uk>
+
+on:
+  workflow_call:
+    inputs:
+      ref_for_scheduled_build:
+        description: |
+          'Reference on which the repo should be checkout for scheduled build.
+          Usually is this name of a branch or a tag.'
+        default: ''
+        required: false
+        type: string
+    secrets:
+      precommit-pr-token:
+        description: 'PAT from GreatAlexander for PR auto-approval'
+        required: true
+
+jobs:
+  auto_update_and_create_pr:
+    runs-on: ubuntu-latest
+    env:
+      # this will be src/{repo-owner}/{repo-name}
+      path: src/${{ github.repository }}
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          path: ${{ env.path }}
+          ref: ${{ github.event.inputs.ref_for_scheduled_build }}
+
+      - name: Install pre-commit
+        run: |
+          sudo apt-get install -qq python3-venv
+          python3 -m venv .venv
+          source .venv/bin/activate
+          python3 -m pip install pre-commit
+
+      - name: Auto-update with pre-commit
+        run: |
+          source .venv/bin/activate
+          cd ${{ env.path }}
+          pre-commit autoupdate || true  # Ignoring errors
+
+      - name: Check for changes
+        id: git_status
+        run: |
+          cd ${{ env.path }}
+          git diff --quiet && echo "changed=false" >> $GITHUB_OUTPUT || echo "changed=true" >> $GITHUB_OUTPUT
+
+      - name: There are changes
+        id: git_diff
+        if: steps.git_status.outputs.changed == 'true'
+        run: |
+          cd ${{ env.path }}
+          {
+            echo 'PR_COMMIT_DIFF<<EOF'
+            git diff --unified=1
+            echo EOF
+          } >> "$GITHUB_ENV"
+          git diff --exit-code || true
+
+      - name: No changes!
+        if: steps.git_status.outputs.changed == 'false'
+        run: |
+          echo "No changes detected"
+
+      - name: Create Pull Request
+        id: cpr
+        if: steps.git_status.outputs.changed == 'true'
+        uses: peter-evans/create-pull-request@v7
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          branch: auto-update-${{ github.event.inputs.ref_for_scheduled_build }}
+          base: main
+          commit-message: |
+            Bump version of pre-commit hooks
+
+            ```diff
+            ${{ env.PR_COMMIT_DIFF }}
+            ```
+          title: Bump version of pre-commit hooks
+          body: |
+            This pull request contains auto-updated files of the pre-commit config.
+
+            ```diff
+            ${{ env.PR_COMMIT_DIFF }}
+            ```
+          delete-branch: true
+          draft: false
+          path: ${{ env.path }}
+
+      - name: Enable Pull Request Automerge
+        if: steps.cpr.outputs.pull-request-operation == 'created'
+        run: |
+          cd ${{ env.path }}
+          gh pr merge --squash --auto "${{ steps.cpr.outputs.pull-request-number }}"
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Auto approve
+        if: steps.cpr.outputs.pull-request-operation == 'created'
+        run: |
+          cd ${{ env.path }}
+          gh pr review --approve "${{ steps.cpr.outputs.pull-request-number }}"
+        env:
+          GH_TOKEN: ${{ secrets.precommit-pr-token }}
