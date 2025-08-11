@@ -3,3 +3,6 @@ src/
 
 # Visual Studio Code
 .vscode/
+
+# Ignore logs
+*.log

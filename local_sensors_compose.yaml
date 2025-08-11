@@ -79,3 +79,4 @@ services:
       - "/dev:/dev"
       - "/tmp:/tmp"
       - "/etc/localtime:/etc/localtime:ro"
+      - "./logs:/workspace/scripts/logs"

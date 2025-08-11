@@ -64,6 +64,10 @@ while [[ $# -gt 0 ]]; do
     esac
 done
 
+# Create logs directory
+SCRIPT_DIR=$(dirname "$(readlink -f "${BASH_SOURCE[0]}")")
+mkdir -p "$SCRIPT_DIR/logs"
+
 build_docker_images() {
     original_dir=$(pwd)  # Save the original directory
     for service in $services; do
