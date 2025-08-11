@@ -10,6 +10,16 @@ services:
       - "/tmp:/tmp"
       - "/etc/localtime:/etc/localtime:ro"
 
+  av_camera:
+    image: "av_camera:latest"
+    container_name: av_camera
+    network_mode: "host"
+    privileged: true
+    volumes:
+      - "/dev:/dev"
+      - "/tmp:/tmp"
+      - "/etc/localtime:/etc/localtime:ro"
+
   av_car_description:
     image: "av_car_description:latest"
     container_name: av_car_description
@@ -30,16 +40,6 @@ services:
       - "/tmp:/tmp"
       - "/etc/localtime:/etc/localtime:ro"
 
-  av_imu:
-    image: "av_imu:latest"
-    container_name: av_imu
-    network_mode: "host"
-    privileged: true
-    volumes:
-      - "/dev:/dev"
-      - "/tmp:/tmp"
-      - "/etc/localtime:/etc/localtime:ro"
-
   av_gps:
     image: "av_gps:latest"
     container_name: av_gps
@@ -50,9 +50,9 @@ services:
       - "/tmp:/tmp"
       - "/etc/localtime:/etc/localtime:ro"
 
-  av_camera:
-    image: "av_camera:latest"
-    container_name: av_camera
+  av_imu:
+    image: "av_imu:latest"
+    container_name: av_imu
     network_mode: "host"
     privileged: true
     volumes:
