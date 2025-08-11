@@ -40,28 +40,6 @@ services:
       - "/tmp:/tmp"
       - "/etc/localtime:/etc/localtime:ro"
 
-  av_ouster:
-    image: "av_ouster:latest"
-    command: sh -c "ros2 launch av_ouster_launch av_ouster.launch.xml ros_time:='True'"
-    container_name: av_ouster
-    network_mode: "host"
-    privileged: true
-    volumes:
-      - "/dev:/dev"
-      - "/tmp:/tmp"
-      - "/etc/localtime:/etc/localtime:ro"
-
-  av_velodyne:
-    image: "av_velodyne:latest"
-    command: sh -c "ros2 launch av_velodyne_launch av_velodyne.launch.xml ros_time:='True'"
-    container_name: av_velodyne
-    network_mode: "host"
-    privileged: true
-    volumes:
-      - "/dev:/dev"
-      - "/tmp:/tmp"
-      - "/etc/localtime:/etc/localtime:ro"
-
   av_camera:
     image: "av_camera:latest"
     container_name: av_camera
@@ -71,19 +49,3 @@ services:
       - "/dev:/dev"
       - "/tmp:/tmp"
       - "/etc/localtime:/etc/localtime:ro"
-
-  av_camera_trigger:
-    image: "av_camera_trigger:latest"
-    command: sh -c "sleep 13 && ros2 launch av_camera_trigger av_camera_trigger.launch.xml"
-    container_name: av_camera_trigger
-    network_mode: "host"
-    privileged: true
-    volumes:
-      - "/dev:/dev"
-      - "/tmp:/tmp"
-      - "/etc/localtime:/etc/localtime:ro"
-    depends_on:
-      - av_camera
-
-include:
-  - local_radar_compose.yaml
