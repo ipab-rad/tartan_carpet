@@ -59,3 +59,13 @@ services:
       - "/dev:/dev"
       - "/tmp:/tmp"
       - "/etc/localtime:/etc/localtime:ro"
+
+  av_ntrip_client:
+    image: "ghcr.io/ipab-rad/av_camera:latest"
+    container_name: av_ntrip_client
+    network_mode: "host"
+    privileged: true
+    volumes:
+      - "/dev:/dev"
+      - "/tmp:/tmp"
+      - "/etc/localtime:/etc/localtime:ro"
