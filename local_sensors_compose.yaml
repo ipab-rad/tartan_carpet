@@ -60,8 +60,18 @@ services:
       - "/tmp:/tmp"
       - "/etc/localtime:/etc/localtime:ro"
 
+  av_lidar:
+    image: "ghcr.io/ipab-rad/av_lidar:latest"
+    container_name: av_lidar
+    network_mode: "host"
+    privileged: true
+    volumes:
+      - "/dev:/dev"
+      - "/tmp:/tmp"
+      - "/etc/localtime:/etc/localtime:ro"
+
   av_ntrip_client:
-    image: "ghcr.io/ipab-rad/av_camera:latest"
+    image: "ghcr.io/ipab-rad/av_ntrip_client:latest"
     container_name: av_ntrip_client
     network_mode: "host"
     privileged: true
