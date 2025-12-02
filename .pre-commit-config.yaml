@@ -34,20 +34,20 @@ repos:
 
   # Python hooks
   - repo: https://github.com/asottile/pyupgrade
-    rev: v3.21.0
+    rev: v3.21.2
     hooks:
       - id: pyupgrade
         args: [--py36-plus]
 
   - repo: https://github.com/psf/black
-    rev: 25.9.0
+    rev: 25.11.0
     hooks:
       - id: black
         args: ["--line-length=79", -S]
 
   # CPP hooks
   - repo: https://github.com/pre-commit/mirrors-clang-format
-    rev: v21.1.2
+    rev: v21.1.6
     hooks:
       - id: clang-format
         args: ['-fallback-style=none', '-i']
@@ -120,7 +120,7 @@ repos:
 
   # Check Github files
   - repo: https://github.com/python-jsonschema/check-jsonschema
-    rev: 0.34.1
+    rev: 0.35.0
     hooks:
       - id: check-github-workflows
         args: ["--verbose"]
@@ -131,7 +131,7 @@ repos:
 
   # Bash prettify
   - repo: https://github.com/lovesegfault/beautysh
-    rev: v6.4.1
+    rev: v6.4.2
     hooks:
       - id: beautysh
 
