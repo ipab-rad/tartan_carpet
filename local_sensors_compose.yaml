@@ -80,3 +80,13 @@ services:
       - "/tmp:/tmp"
       - "/etc/localtime:/etc/localtime:ro"
       - "./logs:/workspace/scripts/logs"
+
+  av_radar:
+    image: "ghcr.io/ipab-rad/av_radar:latest"
+    container_name: av_radar
+    network_mode: "host"
+    privileged: true
+    volumes:
+      - "/dev:/dev"
+      - "/tmp:/tmp"
+      - "/etc/localtime:/etc/localtime:ro"
