@@ -68,6 +68,9 @@ done
 SCRIPT_DIR=$(dirname "$(readlink -f "${BASH_SOURCE[0]}")")
 mkdir -p "$SCRIPT_DIR/logs"
 
+# Restart license checking service as it sometimes gets stuck
+sudo /bin/systemctl restart codemeter.service
+
 build_docker_images() {
     original_dir=$(pwd)  # Save the original directory
     for service in $services; do

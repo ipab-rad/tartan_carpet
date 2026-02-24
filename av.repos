@@ -1,4 +1,8 @@
 repositories:
+  av_bms:
+    type: git
+    url: git@github.com:ipab-rad/av_bms.git
+    version: main
   av_camera:
     type: git
     url: git@github.com:ipab-rad/av_camera.git
@@ -23,27 +27,15 @@ repositories:
     type: git
     url: git@github.com:ipab-rad/av_imu.git
     version: main
+  av_lidar:
+    type: git
+    url: git@github.com:ipab-rad/av_lidar.git
+    version: main
   av_ntrip_client:
     type: git
     url: git@github.com:ipab-rad/av_ntrip_client.git
-    version: main
-  av_ouster:
-    type: git
-    url: git@github.com:ipab-rad/av_ouster.git
     version: main
   av_radar:
     type: git
     url: git@github.com:ipab-rad/av_radar.git
     version: main
-  av_radar_bridge:
-    type: git
-    url: git@github.com:ipab-rad/aw_radar_bridge.git
-    version: main
-  av_velodyne:
-    type: git
-    url: git@github.com:ipab-rad/av_velodyne.git
-    version: main
-  ros1_bridge:
-    type: git
-    url: git@github.com:ipab-rad/ros1_bridge.git
-    version: master
