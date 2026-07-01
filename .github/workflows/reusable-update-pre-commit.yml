@@ -27,7 +27,7 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
         with:
           fetch-depth: 0
           path: ${{ env.path }}
@@ -72,7 +72,7 @@ jobs:
       - name: Create Pull Request
         id: cpr
         if: steps.git_status.outputs.changed == 'true'
-        uses: peter-evans/create-pull-request@v7
+        uses: peter-evans/create-pull-request@v8
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           branch: auto-update-${{ github.event.inputs.ref_for_scheduled_build }}
